@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Feedback
+from .forms import FeedbackForm
 from django.http import HttpResponse
 
 # Главная страница
@@ -19,3 +21,17 @@ def post_detail(request, post_id):
         'content': 'Контент поста будет здесь.'
     }
     return render(request, 'blog/post_detail.html', {'post': post})
+
+
+def feedback_list(request):
+    feedbacks = Feedback.objects.filter(checked=True)
+
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('feedback_list')
+    else:
+        form = FeedbackForm()
+
+    return render(request, 'blog/feedback_list.html', {'feedbacks': feedbacks, 'form': form})

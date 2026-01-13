@@ -1,8 +1,11 @@
 {% extends 'blog/base.html' %}
 
+{% load static %}
+
 {% block title %}Пост {{ post.id }}{% endblock %}
 
 {% block content %}
 <h2>{{ post.title }}</h2>
 <p>{{ post.content }}</p>
+<img src="{% static 'images/post1.png' %}" alt="Изображение для поста 1" style="width: 300px;">
 {% endblock %}

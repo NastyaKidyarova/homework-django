@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Отзывы{% endblock %}
+
+{% block content %}
+    <h2>Отзывы</h2>
+
+    <h3>Добавить новый отзыв</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+
+    <h3>Все отзывы</h3>
+    <ul>
+        {% for feedback in feedbacks %}
+            <li>
+                <strong>{{ feedback.full_name }}</strong> ({{ feedback.email }})<br>
+                {{ feedback.text }}
+            </li>
+        {% empty %}
+            <li>Пока нет отзывов.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,11 +1,22 @@
 {% extends 'blog/base.html' %}
 
+{% load static %}
+
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
 <h2>Последние посты</h2>
 <ul>
-    <li><a href="/post/1/">Пост 1</a></li>
-    <li><a href="/post/2/">Пост 2</a></li>
+    <li>
+        <h3>Пост 1</h3>
+        <p>Текст поста 1...</p>
+        <a href="{% url 'post_detail' 1 %}">Читать далее</a>
+    </li>
+    <li>
+        <h3>Пост 2</h3>
+        <img src="{% static 'images/post2.png' %}" alt="Изображение для поста 2" style="width: 300px;">
+        <p>Текст поста 2...</p>
+        <a href="{% url 'post_detail' 2 %}">Читать далее</a>
+    </li>
 </ul>
 {% endblock %}
